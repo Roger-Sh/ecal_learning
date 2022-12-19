@@ -20,3 +20,8 @@ set(protobuf_files ${protobuf_folder}/hello_world.proto)
 add_executable(helloworld_proto_puber src/helloworld_proto_puber.cpp)
 PROTOBUF_TARGET_CPP(helloworld_proto_puber ${protobuf_folder} ${protobuf_files})
 target_link_libraries(helloworld_proto_puber eCAL::core protobuf::libprotobuf)
+
+# helloworld_proto_suber
+add_executable(helloworld_proto_suber src/helloworld_proto_suber.cpp)
+PROTOBUF_TARGET_CPP(helloworld_proto_suber ${protobuf_folder} ${protobuf_files})
+target_link_libraries(helloworld_proto_suber eCAL::core protobuf::libprotobuf)
