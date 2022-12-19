@@ -1,0 +1,12 @@
+# vscode related
+.vscode
+
+# cmake related
+devel/
+logs/
+build/
+bin/
+msg_gen/
+srv_gen/
+build_isolated/
+devel_isolated/
