@@ -9,12 +9,10 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
 find_package(eCAL REQUIRED)
 
-set(source_files
-  src/main.cpp
-)
+# helloworld_puber
+add_executable(helloworld_puber src/helloworld_puber.cpp)
+target_link_libraries(helloworld_puber eCAL::core)
 
-add_executable(${PROJECT_NAME} ${source_files})
-
-target_link_libraries(${PROJECT_NAME}
-  eCAL::core
-)
+# helloworld_suber
+add_executable(helloworld_suber src/helloworld_suber.cpp)
+target_link_libraries(helloworld_suber eCAL::core)
