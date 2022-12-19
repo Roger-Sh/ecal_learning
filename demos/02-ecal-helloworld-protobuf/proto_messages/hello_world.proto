@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+// package name
+package proto_messages;
+
+// msg name
+message HelloWorld
+{
+    string name     = 1;
+    uint32 id       = 2;
+    string msg      = 3;
+}
