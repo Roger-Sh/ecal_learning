@@ -20,6 +20,26 @@
 
 ## Install
 
+-   Install Protobuf 
+
+    ```bash
+    # install protobuf dependencies
+    sudo apt-get install autoconf automake libtool curl make g++ unzip
+    
+    # download protobuf 3.0.x from github
+    # download gmock using autogen.sh, this step needs proxy, otherwise the zip file will be uncomplete
+    ./autogen.sh
+    # build
+    #./configure --prefix=/usr # for custom path
+    ./configure # /usr/local
+    make
+    make check # no need
+    sudo make install
+    sudo ldconfig
+    ```
+    
+    
+    
 -   Install on Ubuntu
 
     ```bash
@@ -34,7 +54,8 @@
     sudo apt-get install ecal
     ```
 
-    
+
+
 
 ## Samples
 
@@ -130,7 +151,7 @@
 
         
 
-## Development - C++
+## Demos - C++
 
 ### Dependencies
 
@@ -140,14 +161,52 @@
 
     
 
-### Hello World
+### Topic Puber/Suber
 
--   example: helloworld_puber.cpp
--   example: helloworld_suber.cpp
+-   example:
+    -   helloworld_puber.cpp
+    -   helloworld_suber.cpp
+
+
+-   单节点多suber模式
+
+    -   各个callback互不影响, 一个callback延时不影响另一个callback
+
+    -   callback 只能即时处理一个数据
+
+    -   主while循环中的延时不影响suber callback的执行
+
+        
+
+### Topic Puber/Suber with Protobuf
+
+-   example:
+    -   helloworld_proto_puber.cpp
+    -   helloworld_proto_suber.cpp
+
+-   需要定义protobuf msg, 并在cmakelist中编译链接
+
+### Service Server/Client
+
+-   example:
+    -   minimal_service: 最简单的service模板
+        -   minimal_server.cpp
+        -   minimal_client.cpp
+-   service 特性
+
+    -   service最长等待时间可以无限长
+
+    -   blocking 和 callback 两种模式
+        -   service client response callback 中的延时会影响外部的运行
 
 
 
-### Hello World with protobuf
+### Service Server/Client with Protobuf
 
--   example: helloworld_proto_puber.cpp
--   example: helloworld_proto_suber.cpp
+-   example
+    -   math_service: 在protobuf msg 中定义service input/output
+        -   math_server.cpp
+        -   math_client.cpp
+
+-   protobuf service
+    -   在 protobuf msg 中定义 service input/output
