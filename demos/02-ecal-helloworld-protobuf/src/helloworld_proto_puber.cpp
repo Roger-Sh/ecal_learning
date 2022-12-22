@@ -11,6 +11,7 @@ int main(int argc, char **argv)
     // Initialize eCAL and create a protobuf publisher
     eCAL::Initialize(argc, argv, "Hello World Protobuf Publisher");
     eCAL::protobuf::CPublisher<proto_messages::HelloWorld> publisher("hello_world_protobuf");
+    eCAL::protobuf::CPublisher<proto_messages::HelloWorld> publisher2("hello_world_protobuf2");
 
     // Ask the user to input his name
     std::cout << "Please enter your name: ";
@@ -24,9 +25,9 @@ int main(int argc, char **argv)
     while (eCAL::Ok())
     {
         // Let the user input a message
-        std::cout << "Type the message you want to send: ";
+        // std::cout << "Type the message you want to send: ";
         std::string message;
-        std::getline(std::cin, message);
+        // std::getline(std::cin, message);
 
         // Create a protobuf message object
         proto_messages::HelloWorld hello_world_message;
@@ -36,8 +37,16 @@ int main(int argc, char **argv)
 
         // Send the message
         publisher.Send(hello_world_message);
-        std::cout << "Sent message!" << std::endl
+        publisher2.Send(hello_world_message);
+        std::cout << "Sent message!" << id << std::endl
                   << std::endl;
+
+        // std::this_thread::sleep_for(std::chrono::milliseconds(5));
+
+        if (id > 1000)
+        {
+            break;
+        }
     }
 
     // finalize eCAL API

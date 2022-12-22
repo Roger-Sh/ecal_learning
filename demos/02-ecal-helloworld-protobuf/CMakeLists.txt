@@ -8,12 +8,21 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
-# find package
+# find ecal
 find_package(eCAL REQUIRED)
+
+# find protobuf
 find_package(Protobuf REQUIRED)
+message(WARNING "${Protobuf_VERSION}")
+message(WARNING "${Protobuf_LIBRARY}")
+message(WARNING "${Protobuf_INCLUDE_DIR}")
+message(WARNING "${Protobuf_PROTOC_LIBRARY}")
+message(WARNING "${Protobuf_LIBRARIES}")
+message(WARNING "${Protobuf_INCLUDE_DIRS}")
+message(WARNING "${Protobuf_PROTOC_LIBRARIES}")
 
 # set protobuf folder&files
-set(protobuf_folder ${PROJECT_SOURCE_DIR}/proto_messages)
+set(protobuf_folder ${PROJECT_SOURCE_DIR}/proto)
 set(protobuf_files ${protobuf_folder}/hello_world.proto)
 
 # helloworld_proto_puber
