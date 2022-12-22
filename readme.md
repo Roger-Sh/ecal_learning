@@ -249,7 +249,7 @@ simple protobuf cmake example
     -   ecal_camera_snd
         -   主要是通过QT相关组件获取图像数据并转换为protobuf数据
     -   camera_receiver_mon_plugin
-        -   ecal_mon_gui 插件, 显示订阅的图像数据
+        -   ecal_mon_gui 插件, 通过qt插件显示订阅的图像
 
 -   安装方法
 
