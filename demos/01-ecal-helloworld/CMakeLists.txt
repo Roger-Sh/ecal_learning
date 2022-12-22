@@ -10,6 +10,13 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
 # find package
 find_package(eCAL REQUIRED)
+message(WARNING "${Protobuf_VERSION}")
+message(WARNING "${Protobuf_LIBRARY}")
+message(WARNING "${Protobuf_INCLUDE_DIR}")
+message(WARNING "${Protobuf_PROTOC_LIBRARY}")
+message(WARNING "${Protobuf_LIBRARIES}")
+message(WARNING "${Protobuf_INCLUDE_DIRS}")
+message(WARNING "${Protobuf_PROTOC_LIBRARIES}")
 
 # helloworld_puber
 add_executable(helloworld_puber src/helloworld_puber.cpp)
