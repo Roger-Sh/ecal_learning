@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option cc_generic_services = true;
+
+///////////////////////////////////////////////////////
+// Math Service
+///////////////////////////////////////////////////////
+
+// package name
+package math_service_pb;
+
+message SFloatTuple
+{
+  double inp1 = 1;
+  double inp2 = 2;
+}
+
+message SFloat
+{
+  double out  = 1;
+}
+
+// rpc: remote procedure call, 远程程序调用, 需要手动实现
+service MathService
+{
+  rpc Add      (SFloatTuple) returns (SFloat);
+  rpc Multiply (SFloatTuple) returns (SFloat);
+  rpc Divide   (SFloatTuple) returns (SFloat);
+}
