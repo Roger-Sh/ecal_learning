@@ -207,6 +207,9 @@
     -   math_service: 在protobuf msg 中定义service input/output
         -   math_server.cpp
         -   math_client.cpp
+    -   ping_service
+        -   ping_server.cpp
+        -   ping_client.cpp
 
 -   protobuf service
     -   在 protobuf msg 中定义 service input/output

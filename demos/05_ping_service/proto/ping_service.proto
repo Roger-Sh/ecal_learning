@@ -1,0 +1,25 @@
+// set protobuf syntax rules
+syntax = "proto3";
+
+// generate proto service code
+// need other RPC system to implement service
+option cc_generic_services = true;
+
+// ping_service request/input
+message PingRequest
+{
+  string message = 1;
+}
+
+// ping_service response/output
+message PingResponse
+{
+  string answer  = 1;
+}
+
+// ping_service
+service PingService
+{
+  // rpc: remote prosedure call
+  rpc Ping (PingRequest) returns (PingResponse);
+}
