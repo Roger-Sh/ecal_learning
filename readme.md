@@ -240,3 +240,49 @@ simple protobuf cmake example
 
 
 
+### Demo07_ecal_camera_examples
+
+-   原始项目地址: [ecal-caemra-samples](https://github.com/eclipse-ecal/ecal-camera-samples)
+
+-   该demo包括了一个USB相机数据发布程序和一个 ecal_mon_gui 插件, 用以显示相机图像
+
+    -   ecal_camera_snd
+        -   主要是通过QT相关组件获取图像数据并转换为protobuf数据
+    -   camera_receiver_mon_plugin
+        -   ecal_mon_gui 插件, 显示订阅的图像数据
+
+-   安装方法
+
+    ```bash
+    # install dependencies
+    sudo apt install ecal \
+    qtmultimedia5-dev \
+    libqt5multimedia5-plugins \
+    qtwayland5 \
+    protobuf-compiler \
+    libprotoc-dev \
+    libhdf5-dev \
+    cmake
+    
+    # build&install
+    mkdir build
+    cd build
+    # prefix install path set to /usr due to ecal install path is /usr
+    cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr
+    make -j8
+    sudo make install
+    ```
+
+-   使用方法
+
+    ```bash
+    # 启动相机数据发布程序
+    # ecal_camera_snd [topicName] [cameraName] [OPTIONAL_resolutionWidth] [OPTIONAL_resolutionHeight] [OPTIONAL_maxFps]
+    ecal_camera_snd usbcam /dev/video0 1280 720 30
+    
+    # 启动 ecal_mon_gui, 点击 topic 即可显示图像
+    ecal_mon_gui
+    
+    ```
+
+    ![ecal_camera_mon_plugin](readme.assets/ecal_camera_mon_plugin.png)
