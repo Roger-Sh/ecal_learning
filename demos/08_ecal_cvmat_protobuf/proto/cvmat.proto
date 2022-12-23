@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package cvmsgs;
+
+message cvmat {
+    int64 ID = 1;           // image ID
+    int32 rows = 2;         // cv image rows
+    int32 cols = 3;         // cv image cols
+    int32 elem_type = 4;    // cv image element type
+    int32 elem_size = 5;    // cv image element size
+    bytes mat_data = 6;     // cv image raw data
+}
