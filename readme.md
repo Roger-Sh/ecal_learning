@@ -286,3 +286,14 @@ simple protobuf cmake example
     ```
 
     ![ecal_camera_mon_plugin](readme.assets/ecal_camera_mon_plugin.png)
+
+
+
+### Demo08_ecal_cvmat_protobuf
+
+-   example
+    -   cvmat_proto_puber.cpp
+    -   cvmat_proto_suber.cpp
+-   pub/sub cv image data as protobuf msg
+
+![image-20221223140320784](readme.assets/image-20221223140320784.png)
