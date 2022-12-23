@@ -12,6 +12,16 @@ int OnMethodCallback(
     const std::string &request_, 
     std::string &response_)
 {
+    // check duration of service
+    int cnt = 0;
+    while(cnt < 10)
+    {
+        std::cout << "cnt: " << cnt << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        cnt++;
+    }
+
+
     std::cout << "Method called : " << method_ << std::endl;
     std::cout << "Request       : " << request_ << std::endl
               << std::endl;

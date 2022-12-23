@@ -15,6 +15,10 @@ find_package(eCAL REQUIRED)
 add_executable(minimal_server src/minimal_server.cpp)
 target_link_libraries(minimal_server eCAL::core)
 
-# minimal_client
-add_executable(minimal_client src/minimal_client.cpp)
-target_link_libraries(minimal_client eCAL::core)
+# minimal_client_block
+add_executable(minimal_client_block src/minimal_client_block.cpp)
+target_link_libraries(minimal_client_block eCAL::core)
+
+# minimal_client_callback
+add_executable(minimal_client_callback src/minimal_client_callback.cpp)
+target_link_libraries(minimal_client_callback eCAL::core)
