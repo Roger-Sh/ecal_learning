@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
-# find package
+# find eCAL
 find_package(eCAL REQUIRED)
 message(WARNING "${eCAL_VERSION}")
 # message(WARNING "${eCAL_LIB}")

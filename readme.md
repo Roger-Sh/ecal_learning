@@ -170,6 +170,8 @@ simple protobuf cmake example
 
 ### Demo01_ecal_helloworld
 
+-   本例程演示了如何通过ecal实现简单的pub/sub功能
+
 -   topic puber/suber example
 
     -   helloworld_puber.cpp
@@ -188,6 +190,8 @@ simple protobuf cmake example
 
 ### Demo02_ecal_helloworld_protobuf
 
+-   本例程演示了如何通过ecal传输protobuf消息
+
 -   topic puber/suber with custom protobuf msgs example:
 
     -   helloworld_proto_puber.cpp
@@ -198,6 +202,8 @@ simple protobuf cmake example
     
 
 ### Demo03_minimal_service
+
+-   本例程演示了如何通过ecal构建简单的service功能
 
 -   minimal_service: 最简单的 ecal service 模板
     -   minimal_server.cpp
@@ -214,19 +220,18 @@ simple protobuf cmake example
 
 ### Demo04_math_service
 
--   math_service: 通过 protobuf 自定义 service request response  
-
+-   本例程演示了一个简单的 math_service
     -   math_server.cpp
-
     -   math_client.cpp
 
-        
+
 
 ### Demo05_ping_service
 
--   ping_service: 简单的 protobuf 自定义 service
+-   本例程演示了一个通过 protobuf 定义的 ecal service
 
     -   ping_service.cpp
+
 
     -   ping_client.cpp
 
@@ -234,7 +239,7 @@ simple protobuf cmake example
 
 ### Demo06_ecal_binary
 
--   通过 eCAL 发布 binary 数据
+-   本例程演示了如何通过 eCAL 发布 binary 数据
     -   ecal_binary_snd.cpp
     -   ecal_binary_rec.cpp
 
@@ -291,9 +296,20 @@ simple protobuf cmake example
 
 ### Demo08_ecal_cvmat_protobuf
 
--   example
+-   本例程演示了通过 ecal 和 protobuf 序列化传输 `cv::Mat` 数据
     -   cvmat_proto_puber.cpp
     -   cvmat_proto_suber.cpp
--   pub/sub cv image data as protobuf msg
+-   传输效果如下:![image-20221223140320784](readme.assets/image-20221223140320784.png)
 
-![image-20221223140320784](readme.assets/image-20221223140320784.png)
+
+
+### Demo09_ecal_pcl_pointcloud_protobuf
+
+-   本例程演示了通过 ecal 和 protobuf 序列化传输 `pcl::PointCloud<pcl::PointXYZ>` 数据
+    -   pcl_protobuf_puber.cpp
+    -   pcl_protobuf_suber.cpp
+
+-   传输效果如下, 点云会沿X轴左右移动
+
+    ![image-20221223181252054](readme.assets/image-20221223181252054.png)
+

@@ -28,7 +28,6 @@ int main(int argc, char **argv)
     // init ecal publisher
     eCAL::protobuf::CPublisher<cvmsgs::cvmat> publisher("cvmat_proto");
 
-    
     // init cv mat
     unsigned int id = 0;
     cv::Mat image_origin = cv::Mat::ones(cv::Size(1280, 720), CV_8UC3);

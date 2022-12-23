@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package pcl_proto_msgs;
+
+message pointcloud_xyz {
+    int64 ID = 1;           // pcl pointcloud ID
+    int32 width = 2;        // pcl pointcloud width
+    int32 height = 3;       // pcl pointcloud height
+    int32 is_dense = 4;     // pcl pointcloud is_dense
+    int32 points_size = 5;  // pcl pointcloud points size
+    bytes points_data = 6;  // pcl pointcloud points data
+}
