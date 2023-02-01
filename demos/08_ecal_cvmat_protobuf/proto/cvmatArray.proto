@@ -1,0 +1,36 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+package aiforce.pp_msg;
+
+// 相机图像数据
+message camImagePP
+{
+    // proto msg for opencv mat data
+    message cvMat 
+    {
+        // cv image rows
+        int32 rows = 1;         
+
+        // cv image cols
+        int32 cols = 2;         
+
+        // cv image element type
+        int32 elem_type = 3;    
+
+        // cv image element size
+        int32 elem_size = 4;    
+
+        // cv image data
+        bytes mat_data = 5;     
+        
+        // camera ID
+        int32 cam_id = 6;
+    }
+
+	// 时间戳
+	google.protobuf.Timestamp time_stamp = 1;
+
+    // OpenCV Mat 图像数据
+    repeated cvMat imageList = 2;
+}

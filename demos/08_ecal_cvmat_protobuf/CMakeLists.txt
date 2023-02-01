@@ -38,7 +38,7 @@ message(WARNING "${OpenCV_INCLUDE_DIRS}")
 
 # set protobuf folder&files
 set(protobuf_folder ${PROJECT_SOURCE_DIR}/proto)
-set(protobuf_files ${protobuf_folder}/cvmat.proto)
+set(protobuf_files ${protobuf_folder}/cvmat.proto ${protobuf_folder}/cvmatArray.proto)
 
 # cvmat_proto_puber
 add_executable(cvmat_proto_puber src/cvmat_proto_puber.cpp)

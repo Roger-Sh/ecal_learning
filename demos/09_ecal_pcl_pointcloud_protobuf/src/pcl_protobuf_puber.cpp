@@ -22,6 +22,10 @@
  */
 int main(int argc, char **argv)
 {
+    int n = 1;
+    std::cout << n << std::endl;
+    n++;
+
     // init ecal
     eCAL::Initialize(argc, argv, "pcl_pc_puber");
 
