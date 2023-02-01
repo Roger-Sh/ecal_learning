@@ -65,27 +65,6 @@ int main(int argc, char **argv)
          * 
          */
 
-        // cvmat_1
-        // aiforce::pp_msg::camImagePP_cvMat cvmat_1_msg;
-        // cvmat_1_msg.set_cam_id(1);
-        // cvmat_1_msg.set_rows(image_ID.rows);
-        // cvmat_1_msg.set_cols(image_ID.cols);
-        // cvmat_1_msg.set_elem_type(image_ID.type());
-        // cvmat_1_msg.set_elem_size((int)image_ID.elemSize());
-        // cvmat_1_msg.set_mat_data(image_ID.data,
-        //     (size_t)(image_ID.rows * image_ID.cols * image_ID.elemSize()));
-
-        // cvmat_2
-
-        // aiforce::pp_msg::camImagePP_cvMat cvmat_2_msg;
-        // cvmat_2_msg.set_cam_id(2);
-        // cvmat_2_msg.set_rows(image_ID_2.rows);
-        // cvmat_2_msg.set_cols(image_ID_2.cols);
-        // cvmat_2_msg.set_elem_type(image_ID_2.type());
-        // cvmat_2_msg.set_elem_size((int)image_ID_2.elemSize());
-        // cvmat_2_msg.set_mat_data(image_ID_2.data,
-        //     (size_t)(image_ID_2.rows * image_ID_2.cols * image_ID_2.elemSize()));
-
         aiforce::pp_msg::camImagePP cam_images_msg;
 
         aiforce::pp_msg::camImagePP_cvMat* cvmat_1_msg = cam_images_msg.add_imagelist();

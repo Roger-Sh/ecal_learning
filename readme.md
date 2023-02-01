@@ -26,13 +26,13 @@
     # install protobuf dependencies
     sudo apt-get install autoconf automake libtool curl make g++ unzip
     
-    # download protobuf 3.0.x from github
+    # download protobuf > 3.7.0  from github
     # download gmock using autogen.sh, this step needs proxy, otherwise the zip file will be uncomplete
     ./autogen.sh
     # build
     #./configure --prefix=/usr # for custom path
     ./configure # /usr/local
-    make
+    make -j8
     make check # no need
     sudo make install
     sudo ldconfig
@@ -40,7 +40,7 @@
     
     
     
--   Install on Ubuntu
+-   Install ecal on Ubuntu
 
     ```bash
     # install latest version
@@ -235,7 +235,8 @@ simple protobuf cmake example
 
     -   ping_client.cpp
 
-        
+
+​        
 
 ### Demo06_ecal_binary
 
