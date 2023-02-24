@@ -3,31 +3,25 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
+#include <sstream>
 
 // callback for service response
-void OnServiceResponse(const struct eCAL::SServiceResponse &service_response_)
+// 单次调用不会被阻塞
+// 连续调用service，如果上一个请求还未结束，则会被阻塞
+void OnServiceResponse(const struct eCAL::SServiceInfo& service_info_, const std::string& response_)
 {
-    switch (service_response_.call_state)
-    {
-        // service successful executed
-        case eCallState::call_state_executed:
-            std::cout << "Received response for method in CB " 
-                << service_response_.method_name << " : " 
-                << service_response_.response 
-                << " from host " << service_response_.host_name << std::endl;
-            break;
+    std::stringstream ss;
+    ss << "OnServiceResponse get response: \n";
+    ss << "service_info_.call_state" << service_info_.call_state << "\n";
+    ss << "service_info_.error_msg" << service_info_.error_msg << "\n";
+    ss << "service_info_.host_name" << service_info_.host_name << "\n";
+    ss << "service_info_.method_name" << service_info_.method_name << "\n";
+    ss << "service_info_.ret_state" << service_info_.ret_state << "\n";
+    ss << "service_info_.service_name" << service_info_.service_name << "\n";
+    ss << "response: " << response_;
+    std::cout << ss.str();
 
-        // service execution failed
-        case eCallState::call_state_failed:
-            std::cout << "Received error for method in CB " 
-                << service_response_.method_name << " : " 
-                << service_response_.error_msg 
-                << " from host " << service_response_.host_name << std::endl;
-            break;
-
-        default:
-            break;
-    }
+    std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 }
 
 // main entry
@@ -46,15 +40,11 @@ int main(int argc, char **argv)
         std::string method_name("echo");
         std::string request("Hello");
 
-        // no blocking with callback
-        if (minimal_client.Call(method_name, request))
-        {
-            std::cout << "Method 'echo' called with message in CB: " << request << std::endl;
-        }
-        else
-        {
-            std::cout << "Method callback call failed in CB .." << std::endl;
-        }
+        // first CallAsync no blocking
+        // second callAsync will be blocked if the first callAsync is not finished
+        std::cout << "start call async. \n";
+        minimal_client.CallAsync(method_name, request);
+        std::cout << "finish call async. \n";
 
         // sleep a second
         std::this_thread::sleep_for(std::chrono::milliseconds(500));

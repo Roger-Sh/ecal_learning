@@ -25,7 +25,7 @@ public:
                   << std::endl;
 
         // create response
-        response_->set_answer("PONG");
+        response_->set_answer("PONG!");
     }
 };
 
@@ -43,7 +43,7 @@ int main(int argc, char **argv)
 
     // create Ping service server
     std::shared_ptr<PingService> ping_service = std::make_shared<PingServiceImpl>();
-    eCAL::protobuf::CServiceServer<PingService> ping_server(ping_service, "ping service");
+    eCAL::protobuf::CServiceServer<PingService> ping_server(ping_service);
 
     while (eCAL::Ok())
     {

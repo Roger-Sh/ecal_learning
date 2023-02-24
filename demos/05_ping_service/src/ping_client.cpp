@@ -4,8 +4,34 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
+#include <sstream>
 
 #include "ping_service.pb.h"
+
+/**
+ * @brief callback of service client ping
+ * 
+ * @param service_info_ 
+ * @param response_ 
+ */
+void OnPingResponse(const struct eCAL::SServiceInfo& service_info_, const std::string& response_)
+{
+    std::stringstream ss;
+    ss << "OnServiceResponse get response: \n";
+    ss << "service_info_.call_state" << service_info_.call_state << "\n";
+    ss << "service_info_.error_msg" << service_info_.error_msg << "\n";
+    ss << "service_info_.host_name" << service_info_.host_name << "\n";
+    ss << "service_info_.method_name" << service_info_.method_name << "\n";
+    ss << "service_info_.ret_state" << service_info_.ret_state << "\n";
+    ss << "service_info_.service_name" << service_info_.service_name << "\n";
+    PingResponse response_proto;
+    response_proto.ParseFromString(response_);
+    ss << "response: " << response_proto.answer() << "\n";
+
+    std::cout << ss.str();
+
+    // std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+}
 
 /**
  * @brief main entry
@@ -20,62 +46,20 @@ int main(int argc, char **argv)
     eCAL::Initialize(argc, argv, "ping client");
 
     // create ping service client
-    eCAL::protobuf::CServiceClient<PingService> ping_client("ping service");
+    eCAL::protobuf::CServiceClient<PingService> ping_client;
+    ping_client.AddResponseCallback(OnPingResponse);
 
-    // waiting for service
-    while (!ping_client.IsConnected())
-    {
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
-        std::cout << "Waiting for the service .." << std::endl;
-    }
+    // sleep a second for serivce connection
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
     while (eCAL::Ok())
     {
-        if (ping_client.IsConnected())
+        PingRequest ping_req_proto;
+        ping_req_proto.set_message("ping!");
+
+        if (!ping_client.Call("Ping", ping_req_proto))
         {
-            //////////////////////////////////////
-            // Ping service (blocking call)
-            //////////////////////////////////////
-            PingRequest ping_request;
-            ping_request.set_message("PING");
-            eCAL::ServiceResponseVecT service_response_vec;
-            if (ping_client.Call("Ping", ping_request, -1, &service_response_vec))
-            {
-                std::cout << std::endl
-                          << "PingService::Ping method called with message : " << ping_request.message() << std::endl;
-
-                for (auto service_response : service_response_vec)
-                {
-                    switch (service_response.call_state)
-                    {
-                        // service successful executed
-                        case call_state_executed:
-                        {
-                            PingResponse ping_response;
-                            ping_response.ParseFromString(service_response.response);
-                            std::cout << "Received response PingService / Ping : " << ping_response.answer() << " from host " << service_response.host_name << std::endl;
-                            break;
-                        }
-
-                        // service execution failed
-                        case call_state_failed:
-                        {
-                            std::cout << "Received error PingService / Ping : " << service_response.error_msg << " from host " << service_response.host_name << std::endl;
-                            break;
-                        }
-
-                        default:
-                        {
-                            break;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                std::cout << "PingService::Ping method call failed .." << std::endl
-                          << std::endl;
-            }
+            std::cout << "ping call failed\n";
         }
 
         // sleep a second

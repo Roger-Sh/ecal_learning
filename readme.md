@@ -215,6 +215,7 @@ simple protobuf cmake example
 
     -   blocking 和 callback 两种模式
         -   service client response callback 中的延时会影响外部的运行
+    -   service client callback no blocking
 
 
 

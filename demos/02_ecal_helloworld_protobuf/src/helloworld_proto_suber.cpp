@@ -6,6 +6,12 @@
 
 #include "hello_world.pb.h"
 
+/**
+ * @brief single thread callback of subscriber
+ * time-consuming process will block other subscriber callback or main thread
+ * in this example only this callback will receive data
+ * @param hello_world_msg 
+ */
 void HelloWorldCallback(const proto_messages::HelloWorld &hello_world_msg)
 {
     std::cout << "suber1 get data \n"
@@ -14,7 +20,7 @@ void HelloWorldCallback(const proto_messages::HelloWorld &hello_world_msg)
         << hello_world_msg.msg() << std::endl
         << std::endl;
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 
 }
 
@@ -25,7 +31,7 @@ void HelloWorldCallback2(const proto_messages::HelloWorld &hello_world_msg)
         << hello_world_msg.id() << ":" << std::endl
         << hello_world_msg.msg() << std::endl
         << std::endl;
-    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+    // std::this_thread::sleep_for(std::chrono::milliseconds(2000));
 
 }
 

@@ -72,33 +72,33 @@ public:
     }
 };
 
-/**
- * @brief server state callback
- *
- * @param data_
- */
-void OnServerEvent(const eCAL::SServerEventCallbackData *data_)
-{
-    // check data
-    assert(data_);
+// /**
+//  * @brief server state callback
+//  *
+//  * @param data_
+//  */
+// void OnServerEvent(const eCAL::SServerEventCallbackData *data_)
+// {
+//     // check data
+//     assert(data_);
 
-    switch (data_->type)
-    {
-    case eCAL_Server_Event::server_event_connected:
-        std::cout << "-----------------------------------" << std::endl;
-        std::cout << "Server connected                   " << std::endl;
-        std::cout << "-----------------------------------" << std::endl;
-        break;
-    case eCAL_Server_Event::server_event_disconnected:
-        std::cout << "-----------------------------------" << std::endl;
-        std::cout << "Server disconnected                " << std::endl;
-        std::cout << "-----------------------------------" << std::endl;
-        break;
-    default:
-        std::cout << "Unknown server event." << std::endl;
-        break;
-    }
-}
+//     switch (data_->type)
+//     {
+//     case eCAL_Server_Event::server_event_connected:
+//         std::cout << "-----------------------------------" << std::endl;
+//         std::cout << "Server connected                   " << std::endl;
+//         std::cout << "-----------------------------------" << std::endl;
+//         break;
+//     case eCAL_Server_Event::server_event_disconnected:
+//         std::cout << "-----------------------------------" << std::endl;
+//         std::cout << "Server disconnected                " << std::endl;
+//         std::cout << "-----------------------------------" << std::endl;
+//         break;
+//     default:
+//         std::cout << "Unknown server event." << std::endl;
+//         break;
+//     }
+// }
 
 // main entry
 int main(int argc, char **argv)
@@ -110,9 +110,10 @@ int main(int argc, char **argv)
     std::shared_ptr<math_service_pb::MathService> math_service = std::make_shared<MathServiceImpl>();
     eCAL::protobuf::CServiceServer<math_service_pb::MathService> math_server(math_service);
 
-    // register event callbacks
-    math_server.AddEventCallback(eCAL_Server_Event::server_event_connected, std::bind(OnServerEvent, std::placeholders::_2));
-    math_server.AddEventCallback(eCAL_Server_Event::server_event_disconnected, std::bind(OnServerEvent, std::placeholders::_2));
+    // // register event callbacks
+    // // ECAL 5.10+ support this feature
+    // math_server.AddEventCallback(eCAL_Server_Event::server_event_connected, std::bind(OnServerEvent, std::placeholders::_2));
+    // math_server.AddEventCallback(eCAL_Server_Event::server_event_disconnected, std::bind(OnServerEvent, std::placeholders::_2));
 
     while (eCAL::Ok())
     {

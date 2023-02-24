@@ -6,6 +6,14 @@
 
 #include "hello_world.pb.h"
 
+
+/**
+ * @brief simple pub example
+ * 
+ * @param argc 
+ * @param argv 
+ * @return int 
+ */
 int main(int argc, char **argv)
 {
     // Initialize eCAL and create a protobuf publisher
@@ -41,7 +49,7 @@ int main(int argc, char **argv)
         std::cout << "Sent message!" << id << std::endl
                   << std::endl;
 
-        // std::this_thread::sleep_for(std::chrono::milliseconds(5));
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
         if (id > 1000)
         {

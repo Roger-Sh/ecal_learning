@@ -3,34 +3,7 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
-
-// callback for service response
-// void OnServiceResponse(const struct eCAL::SServiceResponse &service_response_)
-// {
-//     std::this_thread::sleep_for(std::chrono::milliseconds(10000));
-
-//     switch (service_response_.call_state)
-//     {
-//         // service successful executed
-//         case eCallState::call_state_executed:
-//             std::cout << "Received response for method in CB " 
-//                 << service_response_.method_name << " : " 
-//                 << service_response_.response 
-//                 << " from host " << service_response_.host_name << std::endl;
-//             break;
-
-//         // service execution failed
-//         case eCallState::call_state_failed:
-//             std::cout << "Received error for method in CB " 
-//                 << service_response_.method_name << " : " 
-//                 << service_response_.error_msg 
-//                 << " from host " << service_response_.host_name << std::endl;
-//             break;
-
-//         default:
-//             break;
-//     }
-// }
+#include <sstream>
 
 // main entry
 int main(int argc, char **argv)
@@ -44,47 +17,23 @@ int main(int argc, char **argv)
 
     while (eCAL::Ok())
     {
-        // eCAL::SServiceResponse service_info;
+        // Service call (blocking)
+        std::string host_name("");
         std::string method_name("echo");
         std::string request("Hello");
+        eCAL::SServiceInfo service_info;
+        std::string response;
+        minimal_client.Call(host_name, method_name, request, service_info, response);
 
-        //////////////////////////////////////
-        // Service call (blocking)
-        //////////////////////////////////////
-        eCAL::ServiceResponseVecT service_response_vec;
-        if (minimal_client.Call(method_name, request, -1, &service_response_vec))
-        {
-            for (auto service_response : service_response_vec)
-            {
-                std::cout << "Method 'echo' called with message in blocking : " << request << std::endl;
-
-                switch (service_response.call_state)
-                {
-                    // service successful executed
-                    case eCallState::call_state_executed:
-                        std::cout << "Received response in blocking: " 
-                            << service_response.response 
-                            << " from host " << service_response.host_name << std::endl;
-                        break;
-                    // service execution failed
-                    
-                    case eCallState::call_state_failed:
-                        std::cout << "Received error in blocking: " 
-                            << service_response.error_msg 
-                            << " from host " << service_response.host_name << std::endl;
-                        break;
-                    
-                    default:
-                        std::cout << "service_info.call_state in blocking: " << service_response.call_state << "\n";
-                        break;
-                }
-            }
-        }
-        else
-        {
-            std::cout << "Method blocking call failed .." << std::endl
-                << std::endl;
-        }
+        std::stringstream ss;
+        ss << "response: " << response << "\n";
+        ss << "service_info.call_state: " << service_info.call_state << "\n";
+        ss << "service_info.error_msg: " << service_info.error_msg << "\n";
+        ss << "service_info.host_name: " << service_info.host_name << "\n";
+        ss << "service_info.method_name: " << service_info.method_name << "\n";
+        ss << "service_info.ret_state: " << service_info.ret_state << "\n";
+        ss << "service_info.service_name: " << service_info.service_name << "\n";
+        std::cout << ss.str();
 
         // sleep a second
         std::this_thread::sleep_for(std::chrono::milliseconds(1000));
